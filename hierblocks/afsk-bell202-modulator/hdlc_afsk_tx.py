@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Hdlc Afsk Tx
-# Generated: Wed Sep 23 13:00:45 2020
+# Generated: Wed Sep 23 13:19:06 2020
 ##################################################
 
 from distutils.version import StrictVersion
@@ -24,7 +24,8 @@ sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnura
 
 from PyQt5 import Qt
 from PyQt5 import Qt, QtCore
-from afsk_mod import afsk_mod  # grc-generated hier_block
+from afsk_bell202_mod import afsk_bell202_mod  # grc-generated hier_block
+from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import gr
@@ -78,10 +79,10 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
-        self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
-        	4096, #size
+        self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
+        	1024, #size
         	audio_rate, #samp_rate
-        	"", #name
+        	'Time Domain', #name
         	1 #number of inputs
         )
         self.qtgui_time_sink_x_0.set_update_time(0.10)
@@ -113,12 +114,9 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
 
-        for i in xrange(2):
+        for i in xrange(1):
             if len(labels[i]) == 0:
-                if(i % 2 == 0):
-                    self.qtgui_time_sink_x_0.set_line_label(i, "Re{{Data {0}}}".format(i/2))
-                else:
-                    self.qtgui_time_sink_x_0.set_line_label(i, "Im{{Data {0}}}".format(i/2))
+                self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
                 self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
             self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
@@ -129,29 +127,29 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.qtgui_freq_sink_x_1 = qtgui.freq_sink_c(
-        	8192, #size
+        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_f(
+        	4096, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
         	0, #fc
         	audio_rate, #bw
-        	"", #name
+        	'Audio Spectrum', #name
         	1 #number of inputs
         )
-        self.qtgui_freq_sink_x_1.set_update_time(0.10)
-        self.qtgui_freq_sink_x_1.set_y_axis(-100, 0)
-        self.qtgui_freq_sink_x_1.set_y_label('Relative Gain', 'dB')
-        self.qtgui_freq_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
-        self.qtgui_freq_sink_x_1.enable_autoscale(False)
-        self.qtgui_freq_sink_x_1.enable_grid(True)
-        self.qtgui_freq_sink_x_1.set_fft_average(1.0)
-        self.qtgui_freq_sink_x_1.enable_axis_labels(True)
-        self.qtgui_freq_sink_x_1.enable_control_panel(False)
+        self.qtgui_freq_sink_x_0.set_update_time(0.10)
+        self.qtgui_freq_sink_x_0.set_y_axis(-100, 0)
+        self.qtgui_freq_sink_x_0.set_y_label('Relative Gain', 'dB')
+        self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
+        self.qtgui_freq_sink_x_0.enable_autoscale(False)
+        self.qtgui_freq_sink_x_0.enable_grid(True)
+        self.qtgui_freq_sink_x_0.set_fft_average(1.0)
+        self.qtgui_freq_sink_x_0.enable_axis_labels(True)
+        self.qtgui_freq_sink_x_0.enable_control_panel(False)
 
         if not True:
-          self.qtgui_freq_sink_x_1.disable_legend()
+          self.qtgui_freq_sink_x_0.disable_legend()
 
-        if "complex" == "float" or "complex" == "msg_float":
-          self.qtgui_freq_sink_x_1.set_plot_pos_half(not True)
+        if "float" == "float" or "float" == "msg_float":
+          self.qtgui_freq_sink_x_0.set_plot_pos_half(not False)
 
         labels = ['', '', '', '', '',
                   '', '', '', '', '']
@@ -163,15 +161,15 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
                   1.0, 1.0, 1.0, 1.0, 1.0]
         for i in xrange(1):
             if len(labels[i]) == 0:
-                self.qtgui_freq_sink_x_1.set_line_label(i, "Data {0}".format(i))
+                self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
-                self.qtgui_freq_sink_x_1.set_line_label(i, labels[i])
-            self.qtgui_freq_sink_x_1.set_line_width(i, widths[i])
-            self.qtgui_freq_sink_x_1.set_line_color(i, colors[i])
-            self.qtgui_freq_sink_x_1.set_line_alpha(i, alphas[i])
+                self.qtgui_freq_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_freq_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_freq_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
 
-        self._qtgui_freq_sink_x_1_win = sip.wrapinstance(self.qtgui_freq_sink_x_1.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_freq_sink_x_1_win)
+        self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
         self.hdlc_frame_encoder_0 = hdlc_frame_encoder(
             tail_seq=3,
             training_seq=40,
@@ -179,11 +177,10 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         )
         self.blocks_socket_pdu_0 = blocks.socket_pdu("TCP_SERVER", 'localhost', '52001', 10000, False)
         self.blocks_random_pdu_0 = blocks.random_pdu(50, 256, chr(0xFF), 2)
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((0.5, ))
         self.blocks_message_strobe_0 = blocks.message_strobe(pmt.intern("TEST"), 6e3)
-        self.afsk_mod_0 = afsk_mod(
-            baudrate=1200,
-            fsk_dev=1000.0,
-            psf_taps=firdes.root_raised_cosine(1.0, 20, 1, 0.35, 11*20),
+        self.audio_sink_0 = audio.sink(int(audio_rate), '', True)
+        self.afsk_bell202_mod_0 = afsk_bell202_mod(
             samp_rate=audio_rate,
         )
 
@@ -193,9 +190,11 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         self.msg_connect((self.blocks_message_strobe_0, 'strobe'), (self.blocks_random_pdu_0, 'generate'))
         self.msg_connect((self.blocks_random_pdu_0, 'pdus'), (self.hdlc_frame_encoder_0, 'message in'))
         self.msg_connect((self.blocks_socket_pdu_0, 'pdus'), (self.hdlc_frame_encoder_0, 'message in'))
-        self.connect((self.afsk_mod_0, 0), (self.qtgui_freq_sink_x_1, 0))
-        self.connect((self.afsk_mod_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.hdlc_frame_encoder_0, 0), (self.afsk_mod_0, 0))
+        self.connect((self.afsk_bell202_mod_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.afsk_bell202_mod_0, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.connect((self.afsk_bell202_mod_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.audio_sink_0, 0))
+        self.connect((self.hdlc_frame_encoder_0, 0), (self.afsk_bell202_mod_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "hdlc_afsk_tx")
@@ -215,8 +214,8 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
     def set_audio_rate(self, audio_rate):
         self.audio_rate = audio_rate
         self.qtgui_time_sink_x_0.set_samp_rate(self.audio_rate)
-        self.qtgui_freq_sink_x_1.set_frequency_range(0, self.audio_rate)
-        self.afsk_mod_0.set_samp_rate(self.audio_rate)
+        self.qtgui_freq_sink_x_0.set_frequency_range(0, self.audio_rate)
+        self.afsk_bell202_mod_0.set_samp_rate(self.audio_rate)
 
 
 def main(top_block_cls=hdlc_afsk_tx, options=None):
