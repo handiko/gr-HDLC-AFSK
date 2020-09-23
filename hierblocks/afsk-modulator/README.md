@@ -17,7 +17,7 @@ You have to have **GNU Radio v3.7.10** (or newer) in your computer first.
 ```
 $ cd
 $ cd gr-HDLC-AFSK/hierblocks/afsk-modulator/
-$ gnuradio-companion afsk-mod.grc
+$ gnuradio-companion afsk_mod.grc
 ```
 * Run the flowgraph (F6).
 * Reload Blocks
@@ -43,9 +43,10 @@ The following is the AFSK Modulator's bigger picture:
 ![](./afsk_mod-example.grc.png)
 ![](./2020-09-23-124124_1366x768_scrot.png)
 
-**File:** 
+**Files:** 
 ```
 gr-HDLC-AFSK/hierblocks/afsk-modulator/afsk_mod-example.grc
+gr-HDLC-AFSK/hierblocks/afsk-modulator/afsk_mod-example-minimum-shift-keying.grc
 ```
 
 ## TODO

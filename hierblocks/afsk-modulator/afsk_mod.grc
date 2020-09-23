@@ -598,7 +598,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>firdes.root_raised_cosine(1.0, 40, 1, 0.35, 11*40)</value>
+      <value>firdes.root_raised_cosine(1.0, 20, 1, 0.35, 11*20)</value>
     </param>
   </block>
   <block>

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Hdlc Afsk Tx
-# Generated: Wed Sep 23 13:19:06 2020
+# Generated: Wed Sep 23 13:27:26 2020
 ##################################################
 
 from distutils.version import StrictVersion
@@ -182,6 +182,7 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         self.audio_sink_0 = audio.sink(int(audio_rate), '', True)
         self.afsk_bell202_mod_0 = afsk_bell202_mod(
             samp_rate=audio_rate,
+            psf_taps=firdes.root_raised_cosine(1.0, 20, 1, 0.35, 11*20),
         )
 
         ##################################################

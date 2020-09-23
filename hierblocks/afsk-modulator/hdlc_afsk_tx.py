@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Hdlc Afsk Tx
-# Generated: Wed Sep 23 13:00:45 2020
+# Generated: Wed Sep 23 13:30:41 2020
 ##################################################
 
 from distutils.version import StrictVersion
@@ -73,6 +73,7 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.train_symb = train_symb = ((1,0,0,0,0,0,0,1),(0,1,1,1,1,1,1,0))
+        self.baudrate = baudrate = 1200
         self.audio_rate = audio_rate = 24e3
 
         ##################################################
@@ -181,9 +182,9 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
         self.blocks_random_pdu_0 = blocks.random_pdu(50, 256, chr(0xFF), 2)
         self.blocks_message_strobe_0 = blocks.message_strobe(pmt.intern("TEST"), 6e3)
         self.afsk_mod_0 = afsk_mod(
-            baudrate=1200,
-            fsk_dev=1000.0,
-            psf_taps=firdes.root_raised_cosine(1.0, 20, 1, 0.35, 11*20),
+            baudrate=baudrate,
+            fsk_dev=baudrate/2.0,
+            psf_taps=firdes.root_raised_cosine(1.0, 40, 1, 0.35, 11*40),
             samp_rate=audio_rate,
         )
 
@@ -208,6 +209,14 @@ class hdlc_afsk_tx(gr.top_block, Qt.QWidget):
     def set_train_symb(self, train_symb):
         self.train_symb = train_symb
         self.hdlc_frame_encoder_0.set_training_symb(self.train_symb[1])
+
+    def get_baudrate(self):
+        return self.baudrate
+
+    def set_baudrate(self, baudrate):
+        self.baudrate = baudrate
+        self.afsk_mod_0.set_baudrate(self.baudrate)
+        self.afsk_mod_0.set_fsk_dev(self.baudrate/2.0)
 
     def get_audio_rate(self):
         return self.audio_rate

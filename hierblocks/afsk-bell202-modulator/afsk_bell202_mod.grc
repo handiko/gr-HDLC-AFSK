@@ -368,7 +368,7 @@ space freq: 2200 Hz</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(864, 376)</value>
+      <value>(800, 376)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -462,7 +462,7 @@ space freq: 2200 Hz</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 268)</value>
+      <value>(760, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -580,6 +580,65 @@ space freq: 2200 Hz</value>
     </param>
   </block>
   <block>
+    <key>fft_filter_xxx</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>decim</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(616, 252)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>fft_filter_xxx_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>nthreads</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>samp_delay</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>taps</key>
+      <value>psf_taps</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>ccc</value>
+    </param>
+  </block>
+  <block>
     <key>import</key>
     <param>
       <key>alias</key>
@@ -622,7 +681,7 @@ space freq: 2200 Hz</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1016, 372)</value>
+      <value>(952, 372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -697,11 +756,7 @@ space freq: 2200 Hz</value>
     </param>
   </block>
   <block>
-    <key>root_raised_cosine_filter</key>
-    <param>
-      <key>alpha</key>
-      <value>0.35</value>
-    </param>
+    <key>parameter</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -711,60 +766,36 @@ space freq: 2200 Hz</value>
       <value></value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>decim</key>
-      <value>1</value>
-    </param>
-    <param>
       <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>fir_filter_ccf</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(616, 228)</value>
+      <value>(656, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
     </param>
     <param>
-      <key>gain</key>
-      <value>1</value>
-    </param>
-    <param>
       <key>id</key>
-      <value>root_raised_cosine_filter_0</value>
+      <value>psf_taps</value>
     </param>
     <param>
-      <key>interp</key>
-      <value>1</value>
+      <key>label</key>
+      <value>Pulse Shaping Filter taps</value>
     </param>
     <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
+      <key>short_id</key>
+      <value></value>
     </param>
     <param>
-      <key>minoutbuf</key>
-      <value>0</value>
+      <key>type</key>
+      <value></value>
     </param>
     <param>
-      <key>ntaps</key>
-      <value>11*sps</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>sps*1.0</value>
-    </param>
-    <param>
-      <key>sym_rate</key>
-      <value>1.0</value>
+      <key>value</key>
+      <value>firdes.root_raised_cosine(1.0, 20, 1, 0.35, 11*20)</value>
     </param>
   </block>
   <block>
@@ -836,7 +867,7 @@ space freq: 2200 Hz</value>
   </connection>
   <connection>
     <source_block_id>blocks_vco_c_0</source_block_id>
-    <sink_block_id>root_raised_cosine_filter_0</sink_block_id>
+    <sink_block_id>fft_filter_xxx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -847,14 +878,14 @@ space freq: 2200 Hz</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>pad_source_0</source_block_id>
-    <sink_block_id>digital_map_bb_0</sink_block_id>
+    <source_block_id>fft_filter_xxx_0</source_block_id>
+    <sink_block_id>blocks_rotator_cc_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>root_raised_cosine_filter_0</source_block_id>
-    <sink_block_id>blocks_rotator_cc_0</sink_block_id>
+    <source_block_id>pad_source_0</source_block_id>
+    <sink_block_id>digital_map_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
